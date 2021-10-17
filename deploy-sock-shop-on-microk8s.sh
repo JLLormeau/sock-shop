@@ -2,32 +2,34 @@
 
 export user=`whoami`
 
+#before installation
 sudo apt udpate
-sudo apt install snapd
-sudo apt install parter
-sudo apt install docker.io
-sudo apt install python3-jmespath
-sudo apt install ntp
-sudo apt install vim
-sudo apt install tree
+sudo apt -y install snapd
+sudo apt -y install parter
+sudo apt -y install docker.io
+sudo apt -y install python3-jmespath
+sudo apt -y install ntp
+sudo apt -y install vim
+sudo apt -y install tree
 
+#install microk8s v1.22
 sudo snap install microk8s --classic --channel=1.22/stable
+
+#add privilege on local user
 sudo usermod -a -G microk8s $user
 sudo chown -f -R $user ~/.kube
 newgrp microk8s
 
-
-/snap/bin/microk8s.kubectl
-
-#bash -c "echo \"--allow-privileged=true\" >> /var/snap/microk8s/current/args/kube-apiserver"
+#alias kubecetl
 sudo snap alias microk8s.kubectl kubectl
 
+#add on
 /snap/bin/microk8s.enable dns
 /snap/bin/microk8s.enable storage
 /snap/bin/microk8s.enable registry
 /snap/bin/microk8s.enable ingress
 
-
+#start
 /snap/bin/microk8s.start
 /snap/bin/microk8s.status --wait-ready
 
