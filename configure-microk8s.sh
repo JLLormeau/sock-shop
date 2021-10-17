@@ -1,6 +1,6 @@
 #!/bin/sh
 
-newgrp microk8s
+newgrp microk8s &
 
 #alias kubecetl
 sudo snap alias microk8s.kubectl kubectl
