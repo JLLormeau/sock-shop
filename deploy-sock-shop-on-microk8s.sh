@@ -1,3 +1,5 @@
+#!/bin/sh
+
 export user=`whoami`
 
 sudo apt udpate
@@ -17,11 +19,9 @@ newgrp microk8s
 
 /snap/bin/microk8s.kubectl
 
-bash -c "echo \"--allow-privileged=true\" >> /var/snap/microk8s/current/args/kube-apiserver"
+#bash -c "echo \"--allow-privileged=true\" >> /var/snap/microk8s/current/args/kube-apiserver"
 sudo snap alias microk8s.kubectl kubectl
-#==> Liste add on /snap/bin/microk8s.status --wait-ready
-#/snap/bin/microk8s.enable dashboard
-#/snap/bin/microk8s.enable rbac
+
 /snap/bin/microk8s.enable dns
 /snap/bin/microk8s.enable storage
 /snap/bin/microk8s.enable registry
@@ -33,3 +33,4 @@ sudo snap alias microk8s.kubectl kubectl
 
 kubectl create namespace sock-shop
 kubectl apply -f complete-demo.yaml
+kubectl apply -f ingress.yaml
