@@ -3,7 +3,7 @@
 export user=`whoami`
 
 #add privilege on local user
-sudo usermod -a -G microk8s $user
+#sudo usermod -a -G microk8s $user
 sudo chown -f -R $user ~/.kube
 newgrp microk8s
 
