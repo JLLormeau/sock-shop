@@ -1,7 +1,5 @@
 #!/bin/sh
 
-export user=`whoami`
-
 #before installation
 sudo apt udpate
 sudo apt -y install snapd
