@@ -14,5 +14,6 @@ sock-shop :
     cd ~/sock-shop
     kubectl create namespace sock-shop
     kubectl apply -f complete-demo.yaml
+    kubectl patch svc front-end --type='json' -p '[{"op":"replace","path":"/spec/type","value":"ClusterIP"}]' -n sock-shop
     kubectl apply -f ingress.yaml
 
