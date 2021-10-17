@@ -31,6 +31,3 @@ sudo snap alias microk8s.kubectl kubectl
 /snap/bin/microk8s.start
 /snap/bin/microk8s.status --wait-ready
 
-kubectl create namespace sock-shop
-kubectl apply -f complete-demo.yaml
-kubectl apply -f ingress.yaml
