@@ -17,3 +17,10 @@ sock-shop :
     kubectl patch svc front-end --type='json' -p '[{"op":"replace","path":"/spec/type","value":"ClusterIP"}]' -n sock-shop
     kubectl apply -f ingress.yaml
     kubectl -n sock-shop create rolebinding default-view --clusterrole=view --serviceaccount=sock-shop:default
+
+
+#############
+uninstall all :
+
+    microk8s.reset
+    snap remove microk8s
