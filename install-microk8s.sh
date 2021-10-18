@@ -16,5 +16,7 @@ sudo apt -y install tree
 sudo snap install microk8s --classic --channel=1.22/stable
 
 #add privilege on local user
-sudo usermod -a -G microk8s $user
-sudo chown -f -R $user ~/.kube
+sudo usermod -a -G microk8s $user &
+sudo chown -f -R $user ~/.kube &
+
+
