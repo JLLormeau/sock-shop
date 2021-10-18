@@ -21,11 +21,10 @@ sudo usermod -a -G microk8s $user
 sudo chown -f -R $user ~/.kube
 echo "newgrp"
 newgrp microk8s &
-sleep 60
 
 #alias kubectl
 echo "alias kubectl"
-sudo snap alias microk8s.kubectl kubectl
+snap alias microk8s.kubectl kubectl
 
 #add on
 echo "add on"
