@@ -21,6 +21,7 @@ sudo usermod -a -G microk8s $user
 sudo chown -f -R $user ~/.kube
 echo "newgrp"
 newgrp microk8s &
+sleep 5
 
 #alias kubectl
 echo "alias kubectl"
