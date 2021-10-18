@@ -1,12 +1,16 @@
 #Deploy Sock-Shop on bare metal microk8s
 
 
-microk8S : 
+install microk8S : 
 
     cd ~
     git clone https://github.com/JLLormeau/sock-shop.git
     cd sock-shop
     sh ./install-microk8s.sh
+    
+configure microk8S : 
+
+    cd ~/sock-shop
     sh ./config-microk8s.sh
     
 sock-shop : 
