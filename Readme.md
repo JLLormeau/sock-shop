@@ -7,6 +7,7 @@ microk8S :
     git clone https://github.com/JLLormeau/sock-shop.git
     cd sock-shop
     sh ./install-microk8s.sh
+    sh ./config-microk8s.sh
     
 sock-shop : 
 
