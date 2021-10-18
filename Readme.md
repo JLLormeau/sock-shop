@@ -6,8 +6,7 @@ microk8S :
     cd ~
     git clone https://github.com/JLLormeau/sock-shop.git
     cd sock-shop
-    chmod +x install-microk8s.sh
-    ./install-microk8s.sh
+    sudo install-microk8s.sh
     
 sock-shop : 
 
