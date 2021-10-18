@@ -21,21 +21,20 @@ sudo usermod -a -G microk8s $user
 sudo chown -f -R $user ~/.kube
 echo "newgrp"
 newgrp microk8s &
-sleep 5
 
 #alias kubectl
 echo "alias kubectl"
-snap alias microk8s.kubectl kubectl
+sudo snap alias microk8s.kubectl kubectl
 
 #add on
 echo "add on"
-/snap/bin/microk8s.enable dns
-/snap/bin/microk8s.enable storage
-/snap/bin/microk8s.enable registry
-/snap/bin/microk8s.enable ingress
+sudo /snap/bin/microk8s.enable dns
+sudo /snap/bin/microk8s.enable storage
+sudo /snap/bin/microk8s.enable registry
+sudo /snap/bin/microk8s.enable ingress
 
 #start
 echo "start"
-/snap/bin/microk8s.start
-/snap/bin/microk8s.status --wait-ready
+sudo /snap/bin/microk8s.start
+sudo /snap/bin/microk8s.status --wait-ready
 
