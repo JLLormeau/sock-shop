@@ -17,8 +17,8 @@ sudo snap install microk8s --classic --channel=1.22/stable
 
 #add privilege on local user
 echo "usermod"
-sudo usermod -a -G microk8s $user &
-sudo chown -f -R $user ~/.kube &
+sudo usermod -a -G microk8s $user
+sudo chown -f -R $user ~/.kube
 echo "newgrp"
 newgrp microk8s &
 
