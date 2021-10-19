@@ -36,7 +36,8 @@ uninstall all :
     kubectl create namespace sock-shop
     kubectl apply -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     
-    kubectl create namespace sock-shop
-    
+###########
+
+    /usr/local/bin/k3s-uninstall.sh
     
     
