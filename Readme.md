@@ -14,7 +14,8 @@ Uninstall :
     
    
 Test : 
-
+    
+    curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s - 
     cd ~
     git clone https://github.com/JLLormeau/sock-shop.git
     cd sock-shop
