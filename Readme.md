@@ -28,3 +28,13 @@ uninstall all :
 
     microk8s.reset
     snap remove microk8s
+
+
+############
+
+    url -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
+
+    kubectl create namespace sock-shop
+    
+    
+    
