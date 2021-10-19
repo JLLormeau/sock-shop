@@ -1,4 +1,4 @@
-#Deploy Sock-Shop on bare metal k3s
+#Deploy Sock-Shop on bare metal k3s with ingress controler
 
 
 Deploy :
