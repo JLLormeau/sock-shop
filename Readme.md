@@ -12,7 +12,9 @@ Uninstall :
 
     /usr/local/bin/k3s-uninstall.sh
     
-    
+   
+Test : 
+
     cd ~
     git clone https://github.com/JLLormeau/sock-shop.git
     cd sock-shop
