@@ -1,5 +1,5 @@
-#Deploy Sock-Shop on bare metal k3s with ingress controler
-
+# Deploy Sock-Shop on bare metal k3s with ingress controler
+--namespace = sock-shop
 
 Deploy :
 
