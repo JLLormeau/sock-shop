@@ -886,22 +886,3 @@ spec:
     targetPort: 27017
   selector:
     name: user-db
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: nginx-ingress
-  namespace: sock-shop
-  annotations:
-    kubernetes.io/ingress.class: "traefik"
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: front-end
-          servicePort: 80
-
-
-
