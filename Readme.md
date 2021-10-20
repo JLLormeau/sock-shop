@@ -10,7 +10,7 @@ Deploy k3s :
 
     #ingress traefik
     echo "\n*****waiting for traefik"
-    ip=""; while [[ -z $ip ]]; do `kubectl get svc traefik -n kube-system`; export ip=`kubectl get svc traefik -n kube-system -o=json 2>&1 |grep \"ip\": | cut -d: -f2 | cut -d\" -f2`; slepp 1 ; done
+    ip=""; while [[ -z $ip ]]; do `kubectl get svc traefik -n kube-system`; export ip=`kubectl get svc traefik -n kube-system -o=json 2>&1 |grep \"ip\": | cut -d: -f2 | cut -d\" -f2`; sleep 1 ; done
     
     #sock-shop
     echo "\n*****install sock-shop (namespace=sock-shop)"
