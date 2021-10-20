@@ -1,5 +1,5 @@
 # Deploy Sock-Shop 
-Rollout on bare metal VM with k3s and traefik ingress controler.
+Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and traefik ingress controler.
 
 
 Deploy k3s :
