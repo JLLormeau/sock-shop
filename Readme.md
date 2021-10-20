@@ -19,8 +19,7 @@ Deploy k3s :
     #access
     echo "\n*****waiting for sock-shop access > 5 minutes"
     while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
-    echo `wget $ip`
-    echo "sock-shop is ready" 
+    echo "=>> sock-shop is ready !!" 
     
 Verify Traefik:
 
