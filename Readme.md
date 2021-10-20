@@ -17,7 +17,7 @@ Deploy k3s :
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     
     #access
-    echo "\n*****waiting for sock-shop access"
+    echo "\n*****waiting for sock-shop access > 5 minutes"
     while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
     echo `wget $ip`
     echo "sock-shop is ready" 
