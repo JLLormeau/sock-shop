@@ -1,15 +1,15 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: traefik-ingress
+  name: nginx-ingress
   namespace: sock-shop
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
   - http:
       paths:
-      - path: /testpath
+      - path: /
         pathType: Prefix
         backend:
           service:
