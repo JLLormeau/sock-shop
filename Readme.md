@@ -9,6 +9,7 @@ Deploy k3s :
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     kubectl apply -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-traefik.yaml
     while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
+    echo `wget $ip`
     echo "sock-shop is ready" 
     
 Verify Traefik:
