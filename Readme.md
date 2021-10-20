@@ -1,6 +1,6 @@
 # Deploy Sock-Shop 
-on bare metal k3s with ingress controler  
-and namespace = sock-shop  
+Rollout on bare metal VM with k3s and traefik ingress controler.
+
 
 Deploy k3s :
 
@@ -16,7 +16,7 @@ Deploy k3s :
     echo "*****install sock-shop (namespace=sock-shop)"
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     
-    #public access
+    #access
     echo "*****waiting for sock-shop access"
     while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
     echo `wget $ip`
