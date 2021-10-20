@@ -29,21 +29,7 @@ Restart Traefik:
 
     kubectl -n kube-system scale deploy traefik --replicas 0
     kubectl -n kube-system scale deploy traefik --replicas 1
-
-Deploy sock-shop:
-
-    kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     
-Verify Ingress : 
-
-    kubectl get ingress -n sock-shop
-    
-
-Restart sock-shop: 
-
-    kubectl -n sock-shop rollout restart deploy
-
-
 Uninstall : 
 
     /usr/local/bin/k3s-uninstall.sh
@@ -53,19 +39,19 @@ Uninstall :
 Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and traefik ingress controler.
    
 
-install microk8S : 
+Install microk8S : 
 
     cd ~
     git clone https://github.com/JLLormeau/sock-shop.git
     cd sock-shop
     sh ./install-microk8s.sh
     
-configure microk8S : 
+Configure microk8S : 
 
     cd ~/sock-shop
     sh ./config-microk8s.sh
     
-sock-shop : 
+Deploy Sock-Shop : 
 
     cd ~/sock-shop
     kubectl create namespace sock-shop
@@ -74,8 +60,21 @@ sock-shop :
     kubectl apply -f ingress.yaml
     kubectl -n sock-shop create rolebinding default-view --clusterrole=view --serviceaccount=sock-shop:default
 
-
-uninstall  :
+Uninstall  :
 
     microk8s.reset
     snap remove microk8s
+
+# Useful commands
+
+Sock-Shop : 
+
+    kubectl get all -n sock-shop
+
+Verify Ingress : 
+
+    kubectl get ingress -n sock-shop
+    
+Restart sock-shop: 
+
+    kubectl -n sock-shop rollout restart deploy
