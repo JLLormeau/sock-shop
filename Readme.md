@@ -9,7 +9,7 @@ Deploy k3s :
     curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.21.5+k3s2 K3S_KUBECONFIG_MODE="644" sh -s -
 
     #ingress traefik
-    echo "\n*****waiting for traefik"
+    echo "\n*****waiting for traefik ~1 minute"
     ip=""; while [[ -z $ip ]]; do `kubectl get svc traefik -n kube-system`; export ip=`kubectl get svc traefik -n kube-system -o=json 2>&1 |grep \"ip\": | cut -d: -f2 | cut -d\" -f2`; sleep 1 ; done
     
     #sock-shop
