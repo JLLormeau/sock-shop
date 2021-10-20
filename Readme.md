@@ -1,4 +1,4 @@
-# Deploy Sock-Shop 
+# Deploy Sock-Shop on k3s 
 Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and traefik ingress controler.
 
 
@@ -48,4 +48,34 @@ Uninstall :
 
     /usr/local/bin/k3s-uninstall.sh
     
+
+# Deploy Sock-Shop on microk8s
+Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and traefik ingress controler.
    
+
+install microk8S : 
+
+    cd ~
+    git clone https://github.com/JLLormeau/sock-shop.git
+    cd sock-shop
+    sh ./install-microk8s.sh
+    
+configure microk8S : 
+
+    cd ~/sock-shop
+    sh ./config-microk8s.sh
+    
+sock-shop : 
+
+    cd ~/sock-shop
+    kubectl create namespace sock-shop
+    kubectl apply -f complete-demo.yaml
+    kubectl patch svc front-end --type='json' -p '[{"op":"replace","path":"/spec/type","value":"ClusterIP"}]' -n sock-shop
+    kubectl apply -f ingress.yaml
+    kubectl -n sock-shop create rolebinding default-view --clusterrole=view --serviceaccount=sock-shop:default
+
+
+uninstall  :
+
+    microk8s.reset
+    snap remove microk8s
