@@ -1,5 +1,6 @@
 # Deploy Sock-Shop on k3s 
-Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and traefik ingress controler.
+Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and traefik ingress controler.  
+(tested with Azure VM Standard D2s v3 - 2 vCP, 8 GB)
 
 
 Deploy k3s :
