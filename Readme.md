@@ -78,3 +78,8 @@ Verify Ingress :
 Restart sock-shop: 
 
     kubectl -n sock-shop rollout restart deploy
+    
+# Dynatrace Operator Installation
+
+Settings > Processes and containers > Container monitoring  
+    Containerd containers => Enable  
