@@ -45,14 +45,21 @@ Deploy k3s with Istio:
     #k3s
     echo "\n*****install k3s"
     curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.19 K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--disable=traefik" sh -s -
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=${ISTIO_VERSION} sh -
-    sudo mv istio-${ISTIO_VERSION}/bin/istioctl /usr/local/bin/istioctl
+    
+    #install istio
+    export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.1 sh -
+    sudo mv istio-1.9.1/bin/istioctl /usr/local/bin/istioctl
     istioctl install -y
+    kubectl label namespace default istio-injection=enabled
     
     #sock-shop
     echo "\n*****install sock-shop (namespace=sock-shop)"
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     
+    #wait until all pods report READY 2/2 and STATUS Running before you go to the next step. > 3 minutes
+    while [[ -z `kubectl get pods -n sock-shop | grep "0/"` ]];do `kubectl get pods -n sock-shop | grep "0/"`; sleep 3; done
+     
     #access
     echo "\n*****waiting for sock-shop access > 5 minutes"
     while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
