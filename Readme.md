@@ -1,9 +1,9 @@
-# Deploy Sock-Shop on k3s 
+# Deploy Sock-Shop on k3s with traefik
 Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and traefik ingress controler.  
 (tested with Azure VM Standard D2s v3 - 2 vCP, 8 GB)
 
 
-Deploy k3s :
+Deploy k3s with trafik:
 
     #k3s
     echo "\n*****install k3s"
@@ -16,7 +16,7 @@ Deploy k3s :
     #sock-shop
     echo "\n*****install sock-shop (namespace=sock-shop)"
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
-    
+    kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-traefik.yaml
     #access
     echo "\n*****waiting for sock-shop access > 5 minutes"
     while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
@@ -35,6 +35,30 @@ Uninstall :
 
     /usr/local/bin/k3s-uninstall.sh
     
+
+
+# Deploy Sock-Shop on k3s with Istio
+
+
+Deploy k3s with Istio:
+
+    #k3s
+    echo "\n*****install k3s"
+    curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.19 K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--disable=traefik" sh -s -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=${ISTIO_VERSION} sh -
+    sudo mv istio-${ISTIO_VERSION}/bin/istioctl /usr/local/bin/istioctl
+    istioctl install -y
+    
+    #sock-shop
+    echo "\n*****install sock-shop (namespace=sock-shop)"
+    kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
+    
+    #access
+    echo "\n*****waiting for sock-shop access > 5 minutes"
+    while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
+    echo "=>> sock-shop is ready !!" 
+    
+
 
 # Deploy Sock-Shop on microk8s
 Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and traefik ingress controler.
