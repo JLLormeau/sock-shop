@@ -20,13 +20,16 @@ metadata:
   name: virtualservice-sockshop
   namespace: sock-shop
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: front-end
-            port:
-              number: 80
+  hosts:
+  - "*"
+  gateways:
+  - bookinfo-gateway
+  http:
+  - match:
+    - uri:
+        exact: /
+    route:
+    - destination:
+        host: productpage
+        port:
+          number: 80
