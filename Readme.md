@@ -58,7 +58,7 @@ Deploy k3s with Istio:
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     
     #wait until all pods report READY 2/2 and STATUS Running before you go to the next step. > 3 minutes
-    while [[ -z `kubectl get pods -n sock-shop | grep "0/"` ]];do `kubectl get pods -n sock-shop | grep "0/"`; sleep 3; done
+    while [[ `kubectl get pods -n sock-shop | grep "0/"` ]];do `kubectl get pods -n sock-shop | grep "0/"`; sleep 3; done
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-istio.yaml
     
     #tuto Istio / https://istio.io/latest/docs/setup/getting-started/#download
