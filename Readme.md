@@ -61,8 +61,10 @@ Deploy k3s with Istio:
     while [[ `kubectl get pods -n sock-shop | grep "0/"` ]];do `kubectl get pods -n sock-shop | grep "0/"`; sleep 3; done
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-istio.yaml
     
-    #tuto Istio / https://istio.io/latest/docs/setup/getting-started/#download
+    #public ip
+    kubectl get svc istio-ingressgateway -n istio-syst
     
+    #tuto Istio / https://istio.io/latest/docs/setup/getting-started/#download
     #access
     echo "\n*****waiting for sock-shop access > 5 minutes"
     while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
