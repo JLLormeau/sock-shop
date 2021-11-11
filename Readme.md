@@ -3,11 +3,10 @@ Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with
 (tested with Azure VM Standard D2s v3 - 2 vCP, 8 GB)
 
     #k3s
-    echo "*****install k3s"; cd ~
+    cd ~
     curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.19 K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--disable=traefik" sh -s -
     
     #install istio
-    echo "*****install istio"
     echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> .profile; source ~/.profile
     curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.1 sh -
     sudo mv istio-1.9.1/bin/istioctl /usr/local/bin/istioctl
@@ -15,13 +14,11 @@ Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with
     kubectl label namespace default istio-injection=enabled
     
     #sock-shop
-    echo "*****install sock-shop (namespace=sock-shop)"
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     
     #waiting for front-end pod report READY before installing istio gateway > 3 minutes
-    echo "*****install sockshop-gateway (namespace=sock-shop)"
     while [[ `kubectl get pods -n sock-shop | grep front-end | grep "0/"` ]];do kubectl get pods -n sock-shop;echo "==> waiting for front-end pod ready";sleep 1; done
-    kubectl apply -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-istio.yaml; echo "==> sock-shop is ready" 
+    kubectl apply -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-istio.yaml
 
 Verify istio:
 
