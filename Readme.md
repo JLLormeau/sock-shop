@@ -2,7 +2,7 @@
 Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with k3s and istio gateway.  
 (tested with Azure VM Standard D2s v3 - 2 vCP, 8 GB)
 
-    #k3s
+    #install k3s
     cd ~
     curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.19 K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--disable=traefik" sh -s -
     
@@ -34,20 +34,17 @@ Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with
 
 Deploy k3s with trafik:
 
-    #k3s
-    echo "*****install k3s"
+    #install k3s
     curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.21.5+k3s2 K3S_KUBECONFIG_MODE="644" sh -s -
 
     #ingress traefik
-    echo "*****waiting for traefik ~1 minute"
     ip=""; while [[ -z $ip ]]; do `kubectl get svc traefik -n kube-system`; export ip=`kubectl get svc traefik -n kube-system -o=json 2>&1 |grep \"ip\": | cut -d: -f2 | cut -d\" -f2`; sleep 1 ; done
     
     #sock-shop
-    echo "*****install sock-shop (namespace=sock-shop)"
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-traefik.yaml
+    
     #access
-    echo "*****waiting for sock-shop access > 5 minutes"
     while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
     echo "=>> sock-shop is ready !!" 
     
