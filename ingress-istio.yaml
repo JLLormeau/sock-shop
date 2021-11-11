@@ -1,18 +1,30 @@
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
+apiVersion: networking.istio.io/v2alpha3
+kind: Gateway
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: istio
-  name: ingress
+  name: sockshop-gateway
   namespace: sock-shop
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: front-end
-            port:
-              number: 80
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: front-end
+  namespace: sock-shop
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - sockshop-gateway
+  http:
+  - route:
+    - destination:
+        host: front-end
