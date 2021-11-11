@@ -21,14 +21,6 @@ Deploy k3s with Istio:
     #waiting for all pods report READY before installing istio gateway > 3 minutes
     while [[ `kubectl get pods -n sock-shop | grep "0/"` ]];do kubectl get pods -n sock-shop;echo "==> waiting for all pods ready";sleep 1; done
     kubectl apply -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-istio.yaml
-    
-    #public ip
-    kubectl get svc istio-ingressgateway -n istio-syst
-    
-    #tuto Istio / https://istio.io/latest/docs/setup/getting-started/#download
-    #access
-    echo "\n*****waiting for sock-shop access > 5 minutes"
-    while [[ `wget $ip 2>&1| grep 404` ]];do echo "."; sleep 1;  done
     echo "=>> sock-shop is ready !!" 
 
 Verify istio:
