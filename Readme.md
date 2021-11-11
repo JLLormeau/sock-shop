@@ -18,7 +18,7 @@ Rollout the Sock-Shop application on bare metal VM (VM on a cloud provider) with
     kubectl create -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/sock-shop.yaml
     
     #waiting for all pods report READY before installing istio gateway > 3 minutes
-    while [[ `kubectl get pods -n sock-shop | grep "0/"` ]];do kubectl get pods -n sock-shop;echo "==> waiting for all pods ready";sleep 1; done
+    while [[ `kubectl get pods -n sock-shop | grep front-end | grep "0/"` ]];do kubectl get pods -n sock-shop;echo "==> waiting for pod front-end ready";sleep 1; done
     kubectl apply -f https://raw.githubusercontent.com/JLLormeau/sock-shop/main/ingress-istio.yaml
     echo "=>> sock-shop is ready !!" 
 
