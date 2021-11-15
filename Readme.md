@@ -26,9 +26,7 @@ Verify istio:
     
 Restart k3s server:
 
-    sudo systemctl stop k3s
-    sudo systemctl start k3s
-
+    sudo systemctl restart k3s
 
 Uninstall k3s : 
 
